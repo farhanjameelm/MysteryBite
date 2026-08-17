@@ -1,0 +1,19 @@
+{
+  "name": "mysterybite",
+  "version": "1.0.0",
+  "description": "A gamified food delivery application with Safe Mode, Spin Food Mode, and Mystery Food Challenge",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
+  },
+  "keywords": ["food-delivery", "gamification", "spin-wheel", "mystery-food"],
+  "author": "MysteryBite Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
