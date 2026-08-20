@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Store, ShoppingCart, DollarSign, Package, TrendingUp } from 'lucide-react';
-import axios from 'axios';
 
 const RestaurantDashboard = () => {
   const [stats, setStats] = useState(null);
