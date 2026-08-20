@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import { useParams, useNavigate } from 'react-router-dom';
 import Confetti from 'react-confetti';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../contexts/AuthContext';
 
 const SpinMode = () => {
@@ -27,7 +27,7 @@ const SpinMode = () => {
 
   const fetchSpinDetails = async () => {
     try {
-      const response = await axios.get(`/api/spin/restaurant/${restaurantId}`);
+      const response = await api.get(`/api/spin/restaurant/${restaurantId}`);
       setRestaurant(response.data);
       setItems(response.data.availableItems);
     } catch (error) {
@@ -41,7 +41,7 @@ const SpinMode = () => {
     setResult(null);
 
     try {
-      const response = await axios.post('/api/spin', {
+      const response = await api.post('/api/spin', {
         restaurantId,
         deliveryAddress: {
           street: '123 Main St',
