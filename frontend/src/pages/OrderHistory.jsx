@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import api from '../api';
 import { Calendar, Package, Clock, CheckCircle, XCircle } from 'lucide-react';
 
 const OrderHistory = () => {
@@ -14,7 +14,7 @@ const OrderHistory = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('/api/orders');
+      const response = await api.get('/api/orders');
       setOrders(response.data.orders);
     } catch (error) {
       console.error('Error fetching orders:', error);
