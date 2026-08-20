@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import { Star, Clock, MapPin, Phone, Heart, ShoppingCart, Filter } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -23,8 +23,8 @@ const RestaurantDetail = () => {
   const fetchRestaurantData = async () => {
     try {
       const [restaurantRes, foodsRes] = await Promise.all([
-        axios.get(`/api/restaurants/${id}`),
-        axios.get(`/api/restaurants/${id}/foods`)
+        api.get(`/api/restaurants/${id}`),
+        api.get(`/api/restaurants/${id}/foods`)
       ]);
       setRestaurant(restaurantRes.data.restaurant);
       setFoods(foodsRes.data.foods);
