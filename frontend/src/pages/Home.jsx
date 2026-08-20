@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Search, Star, Clock, MapPin, ArrowRight, Sparkles, RefreshCw, HelpCircle } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -17,8 +17,8 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const [restaurantsRes, foodsRes] = await Promise.all([
-        axios.get('/api/restaurants?limit=8'),
-        axios.get('/api/foods/popular')
+        api.get('/api/restaurants?limit=8'),
+        api.get('/api/foods/popular')
       ]);
       setRestaurants(restaurantsRes.data.restaurants);
       setPopularFoods(foodsRes.data.foods);
