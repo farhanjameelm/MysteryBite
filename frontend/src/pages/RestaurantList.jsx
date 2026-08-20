@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Filter, Star, Clock, MapPin, SlidersHorizontal } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 import { Link } from 'react-router-dom';
 
 const RestaurantList = () => {
@@ -27,7 +27,7 @@ const RestaurantList = () => {
       if (filters.cuisine) params.append('cuisine', filters.cuisine);
       if (filters.priceRange) params.append('priceRange', filters.priceRange);
 
-      const response = await axios.get(`/api/restaurants?${params}`);
+      const response = await api.get(`/api/restaurants?${params}`);
       setRestaurants(response.data.restaurants);
     } catch (error) {
       console.error('Error fetching restaurants:', error);
