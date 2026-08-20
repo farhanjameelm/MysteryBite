@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Store, ShoppingCart, DollarSign, TrendingUp, Package } from 'lucide-react';
-import axios from 'axios';
+import api from '../../api';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -13,7 +13,7 @@ const AdminDashboard = () => {
 
   const fetchDashboardStats = async () => {
     try {
-      const response = await axios.get('/api/admin/dashboard');
+      const response = await api.get('/api/admin/dashboard');
       setStats(response.data);
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);
