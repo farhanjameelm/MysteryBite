@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Heart, Trash2, ShoppingCart } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 import { useCart } from '../contexts/CartContext';
 import { toast } from 'react-hot-toast';
 
@@ -17,7 +17,7 @@ const Wishlist = () => {
 
   const fetchWishlist = async () => {
     try {
-      const response = await axios.get('/api/users/wishlist');
+      const response = await api.get('/api/users/wishlist');
       setFoods(response.data.foods);
     } catch (error) {
       console.error('Error fetching wishlist:', error);
@@ -28,7 +28,7 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (foodId) => {
     try {
-      await axios.delete(`/api/users/wishlist/${foodId}`);
+      await api.delete(`/api/users/wishlist/${foodId}`);
       setFoods(foods.filter(f => f._id !== foodId));
       toast.success('Removed from wishlist');
     } catch (error) {
