@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../contexts/AuthContext';
 import { Gift, Clock, CheckCircle, XCircle } from 'lucide-react';
 
@@ -28,7 +28,7 @@ const MysteryMode = () => {
 
   const fetchRestaurantFoods = async () => {
     try {
-      const response = await axios.get(`/api/restaurants/${restaurantId}/foods`);
+      const response = await api.get(`/api/restaurants/${restaurantId}/foods`);
       setFoods(response.data.foods);
     } catch (error) {
       toast.error('Failed to load foods');
@@ -43,7 +43,7 @@ const MysteryMode = () => {
     }
 
     try {
-      const response = await axios.post('/api/mystery/order', {
+      const response = await api.post('/api/mystery/order', {
         restaurantId,
         orderedFoodId: selectedFood._id,
         deliveryAddress: {
@@ -68,7 +68,7 @@ const MysteryMode = () => {
     const timeTaken = Math.floor((Date.now() - startTime) / 1000);
 
     try {
-      const response = await axios.post('/api/mystery/guess', {
+      const response = await api.post('/api/mystery/guess', {
         challengeId: challenge,
         guessedFoodId,
         timeTaken
