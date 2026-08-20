@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Star, Clock, ShoppingCart, Heart, ArrowLeft, Plus, Minus } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 import { useCart } from '../contexts/CartContext';
 import { toast } from 'react-hot-toast';
 
@@ -19,7 +19,7 @@ const FoodDetail = () => {
 
   const fetchFood = async () => {
     try {
-      const response = await axios.get(`/api/foods/${id}`);
+      const response = await api.get(`/api/foods/${id}`);
       setFood(response.data.food);
     } catch (error) {
       console.error('Error fetching food:', error);
