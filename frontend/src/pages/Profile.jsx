@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { User, Mail, Phone, MapPin, Camera, Save, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-hot-toast';
-import axios from 'axios';
+import api from '../api';
 
 const Profile = () => {
   const { user, logout, updateUser } = useAuth();
@@ -56,7 +56,7 @@ const Profile = () => {
     setLoading(true);
 
     try {
-      await axios.put('/api/auth/updatedetails', formData);
+      await api.put('/api/auth/updatedetails', formData);
       updateUser({ ...user, ...formData });
       toast.success('Profile updated successfully');
     } catch (error) {
