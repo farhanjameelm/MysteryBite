@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Gift, Star, Trophy, Coins, Ticket, Users } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 
 const Rewards = () => {
   const [loyaltyPoints, setLoyaltyPoints] = useState(0);
@@ -15,8 +15,8 @@ const Rewards = () => {
   const fetchRewardsData = async () => {
     try {
       const [pointsRes, rewardsRes] = await Promise.all([
-        axios.get('/api/rewards/points'),
-        axios.get('/api/rewards')
+        api.get('/api/rewards/points'),
+        api.get('/api/rewards')
       ]);
       setLoyaltyPoints(pointsRes.data.loyaltyPoints);
       setRewards(rewardsRes.data.rewards);
