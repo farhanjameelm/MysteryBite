@@ -5,8 +5,7 @@ import { toast } from 'react-hot-toast';
 import { CreditCard, Wallet, Truck, MapPin, Clock } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
-import axios from 'axios';
-
+import api from '../api';
 const Checkout = () => {
   const navigate = useNavigate();
   const { cart, cartTotal, clearCart } = useCart();
@@ -50,7 +49,7 @@ const Checkout = () => {
 
     try {
       // Create Razorpay order first
-      const razorpayRes = await axios.post('/api/payments/create-order', {
+      const razorpayRes = await api.post('/api/payments/create-order', {
         amount: total,
         currency: 'INR'
       });
@@ -64,7 +63,7 @@ const Checkout = () => {
         order_id: razorpayRes.data.order.id,
         handler: async function (response) {
           // Verify payment and create order
-          const orderRes = await axios.post('/api/orders', {
+          const orderRes = await api.post('/api/orders', {
             items: cart.map(item => ({
               food: item.food._id,
               quantity: item.quantity,
@@ -77,7 +76,7 @@ const Checkout = () => {
             specialInstructions: formData.specialInstructions
           });
 
-          await axios.post('/api/payments/verify', {
+          await api.post('/api/payments/verify', {
             orderId: response.razorpay_order_id,
             paymentId: response.razorpay_payment_id,
             signature: response.razorpay_signature,
