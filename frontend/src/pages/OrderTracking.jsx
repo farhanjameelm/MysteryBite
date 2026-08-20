@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, Clock, Truck, Package, ChefHat } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';
 
 const OrderTracking = () => {
   const { id } = useParams();
@@ -17,7 +17,7 @@ const OrderTracking = () => {
 
   const fetchOrder = async () => {
     try {
-      const response = await axios.get(`/api/orders/${id}`);
+      const response = await api.get(`/api/orders/${id}`);
       setOrder(response.data.order);
       setLoading(false);
     } catch (error) {
