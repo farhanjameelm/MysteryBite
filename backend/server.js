@@ -26,6 +26,10 @@ const rewardRoutes = require('./routes/rewards');
 
 // Initialize Express app
 const app = express();
+
+// Render runs behind a reverse proxy
+app.set('trust proxy', 1);
+
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
