@@ -1,5 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('./models/Category');
+require('./models/Food');
+require('./models/Restaurant');
+require('./models/User');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
